@@ -1,30 +1,30 @@
 class JoyTest {
-  constructor() {    
-    this.blobsContainer = document.querySelectorAll('.blobs');
+  constructor() {
+    // this.blobsContainer = document.querySelectorAll('.blobs');
     this.blobs = document.querySelectorAll('.blob');
     this.pressed = '';
-    
+
     this.blobs.forEach((blob) => {
       blob.value = blob.innerHTML.toLowerCase();
     });
-    
-    window.addEventListener('gamepadconnected', (event) => {
+
+    window.addEventListener('gamepadconnected', (e) => {
       this.stateCheck();
     });
   }
-  
+
   stateCheck() {
     window.requestAnimationFrame(() => {
       this.gamepads = navigator.getGamepads();
-      window.gamepad = this.gamepad
+      window.gamepad = this.gamepad;
       this.gamepad = this.gamepads[0];
-      window.gamepad = this.gamepad
+      window.gamepad = this.gamepad;
       this.padStatus();
       this.stateCheck();
       this.highlightBlob(this.blobs, this.pressed);
     });
   }
-  
+
   padStatus() {
     this.gamepad.buttons.forEach((button, index) => {
       if (this.blobs[index]){
@@ -34,10 +34,10 @@ class JoyTest {
         }
       }
     });
-    
+
     this.directionCommand(this.gamepad.axes);
   }
-  
+
   directionCommand(axis) {
     // Left & Right
     if (axis && round(axis[0]) === -1) {
@@ -45,22 +45,22 @@ class JoyTest {
       this.pressed = 'left';
     } else if (axis && round(axis[0]) === 1) {
       console.log('Right Pressed');
-      this.pressed = 'right';          
+      this.pressed = 'right';
     }
-    
+
     // Up & Down
     if (axis && round(axis[1]) === -1) {
       console.log('Up Pressed');
       this.pressed = 'up';
       fetch('http://192.168.4.1?serialprint=f').then(response => {
-	console.log('fetch response: ', response);
-});
+      	console.log('fetch response: ', response);
+      });
     } else if (axis && round(axis[1]) === 1) {
       console.log('Down Pressed');
-      this.pressed = 'down';          
+      this.pressed = 'down';
     }
   }
-  
+
   sendCommand(button) {
     // let pressed = '';
     switch(button) {
@@ -101,12 +101,12 @@ class JoyTest {
         break;
     }
   }
-  
+
   highlightBlob(blobs, pressed) {
     [...blobs].filter((blob) => {
       blob.classList.remove('pressed');
       if (blob.value === pressed){
-        blob.classList.add('pressed')
+        blob.classList.add('pressed');
       }
     });
     this.pressed = '';
