@@ -23,7 +23,7 @@
   <div class="frame">
     <img src="../images/robot.JPG" alt="Ada to robot" class="robot-image"/>
     <div class="welcome">
-      <h1>Robot Controller</h1>
+      <h1 id="h1">Robot Controller</h1>
       <p id="user-message">
         Connect your gampad and press the start button.
       </p>
@@ -45,16 +45,16 @@
     <div class='snes'>
       <div class='left'>
         <div class='pad'>
-          <div class='control top blob blob--up'>
+          <div class='control top blob blob--up' id='up'>
             <div class='arrow'></div>
           </div>
-          <div class='control left blob blob--left'>
+          <div class='control left blob blob--left' id='left'>
             <div class='arrow'></div>
           </div>
-          <div class='control right blob blob--right'>
+          <div class='control right blob blob--right' id='right'>
             <div class='arrow'></div>
           </div>
-          <div class='control bottom blob blob--down'>
+          <div class='control bottom blob blob--down' id='down'>
             <div class='arrow'></div>
           </div>
           <div class='control middle'></div>
@@ -64,18 +64,18 @@
         <div class='logo'></div>
         <div class='logo clone'></div>
         <div class='title'></div>
-        <button class='select blob--select'></button>
-        <button class='start blob--start'></button>
+        <button class='select blob--select' id='select'></button>
+        <button class='start blob--start' id='start'></button>
       </div>
       <div class='right'>
         <div class='circle'>
           <div class='group-1'>
-            <button class='green blob blob--y'></button>
-            <button class='blue blob blob--x'></button>
+            <button class='green blob blob--y' id='y'></button>
+            <button class='blue blob blob--x' id='x'></button>
           </div>
           <div class='group-2'>
-            <button class='yellow blob blob--b'></button>
-            <button class='red blob blob--a'></button>
+            <button class='yellow blob blob--b' id='b'></button>
+            <button class='red blob blob--a' id='a'></button>
           </div>
         </div>
       </div>

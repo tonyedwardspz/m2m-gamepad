@@ -1,11 +1,11 @@
 class JoyTest {
   constructor() {
-    // this.blobsContainer = document.querySelectorAll('.blobs');
     this.blobs = document.querySelectorAll('.blob');
-    this.pressed = '';
+    this.pressed = 'none';
+    this.h1 = document.getElementById('h1');
 
     this.blobs.forEach((blob) => {
-      blob.value = blob.innerHTML.toLowerCase();
+      blob.value = blob.id.toLowerCase();
     });
 
     window.addEventListener('gamepadconnected', (e) => {
@@ -52,9 +52,9 @@ class JoyTest {
     if (axis && round(axis[1]) === -1) {
       console.log('Up Pressed');
       this.pressed = 'up';
-      fetch('http://192.168.4.1?serialprint=f').then(response => {
-      	console.log('fetch response: ', response);
-      });
+      // fetch('http://192.168.4.1?serialprint=f').then(response => {
+      // 	console.log('fetch response: ', response);
+      // });
     } else if (axis && round(axis[1]) === 1) {
       console.log('Down Pressed');
       this.pressed = 'down';
@@ -97,19 +97,20 @@ class JoyTest {
         this.pressed = 'start';
         break;
       default:
-        console.log('Button not mapped to command');
+        console.log('Button not mapped to command: ', button);
+        this.pressed = 'none';
         break;
     }
   }
 
   highlightBlob(blobs, pressed) {
     [...blobs].filter((blob) => {
-      blob.classList.remove('pressed');
       if (blob.value === pressed){
-        blob.classList.add('pressed');
+        blob.focus();
+        this.pressed = 'none';
       }
     });
-    this.pressed = '';
+    this.pressed = 'none';
   }
 }
 
