@@ -3,6 +3,8 @@ class JoyTest {
     this.blobs = document.querySelectorAll('.blob');
     this.pressed = 'none';
     this.h1 = document.getElementById('h1');
+    this.commandEl = document.getElementById('command-handler');
+    this.robotUrl = 'http://192.168.4.1/?serialprint=';
 
     this.blobs.forEach((blob) => {
       blob.value = blob.id.toLowerCase();
@@ -30,7 +32,7 @@ class JoyTest {
       if (this.blobs[index]){
         this.blobs[index].classList.remove('pressed');
         if (button.pressed) {
-          this.sendCommand(index);
+          this.buttonCommand(index);
         }
       }
     });
@@ -43,50 +45,61 @@ class JoyTest {
     if (axis && round(axis[0]) === -1) {
       console.log('Left Pressed');
       this.pressed = 'left';
+      this.sendCommand('q');
     } else if (axis && round(axis[0]) === 1) {
       console.log('Right Pressed');
       this.pressed = 'right';
+      this.sendCommand('e');
     }
 
     // Up & Down
-    if (axis && round(axis[1]) === -1) {
+    else if (axis && round(axis[1]) === -1) {
       console.log('Up Pressed');
       this.pressed = 'up';
-      // fetch('http://192.168.4.1?serialprint=f').then(response => {
-      // 	console.log('fetch response: ', response);
-      // });
+      this.sendCommand('u');
     } else if (axis && round(axis[1]) === 1) {
       console.log('Down Pressed');
       this.pressed = 'down';
+      this.sendCommand('d');
+    } else {
+      console.log('stoppig');
+      this.sendCommand('s');
+      this.pressed = 'none';
     }
   }
 
-  sendCommand(button) {
+  buttonCommand(button) {
     // let pressed = '';
     switch(button) {
       case 0:
         console.log('Button X Pressed');
         this.pressed = 'x';
+        this.sendCommand('x');
         break;
       case 1:
         console.log('Button A Pressed');
         this.pressed = 'a';
+        this.sendCommand('a');
         break;
       case 2:
         console.log('Button B Pressed');
         this.pressed = 'b';
+        this.sendCommand('b');
         break;
       case 3:
         console.log('Button Y Pressed');
         this.pressed = 'y';
+        this.sendCommand('y');
         break;
       case 4:
         console.log('Button L Pressed');
         this.pressed = 'l';
+        this.sendCommand('l');
         break;
       case 5:
         console.log('Button R Pressed');
         this.pressed = 'r';
+        this.sendCommand('r');
         break;
       case 8:
         console.log('Button Select Pressed');
@@ -111,6 +124,10 @@ class JoyTest {
       }
     });
     this.pressed = 'none';
+  }
+
+  sendCommand(command) {
+    this.commandEl.src = `${this.robotUrl}${command}`;
   }
 }
 
