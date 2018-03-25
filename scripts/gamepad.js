@@ -62,14 +62,13 @@ class JoyTest {
       this.pressed = 'down';
       this.sendCommand('d');
     } else {
-      console.log('stoppig');
+      console.log('stopping');
       this.sendCommand('s');
       this.pressed = 'none';
     }
   }
 
   buttonCommand(button) {
-    // let pressed = '';
     switch(button) {
       case 0:
         console.log('Button X Pressed');
@@ -127,7 +126,11 @@ class JoyTest {
   }
 
   sendCommand(command) {
-    this.commandEl.src = `${this.robotUrl}${command}`;
+    try{
+      this.commandEl.src = `${this.robotUrl}${command}`;
+    } catch (err) {
+      console.log('Error sending command: ', err);
+    }
   }
 }
 
