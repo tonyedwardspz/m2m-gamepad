@@ -1,4 +1,4 @@
-class JoyTest {
+class JoyPad {
   constructor() {
     this.blobs = document.querySelectorAll('.blob');
     this.pressed = 'none';
@@ -134,7 +134,7 @@ class JoyTest {
   }
 }
 
-new JoyTest();
+new JoyPad();
 
 function round(v) {
     return (v >= 0 || -1) * Math.round(Math.abs(v));
