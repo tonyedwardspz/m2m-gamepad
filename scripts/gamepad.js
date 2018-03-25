@@ -3,6 +3,7 @@ class JoyPad {
     this.blobs = document.querySelectorAll('.blob');
     this.pressed = 'none';
     this.h1 = document.getElementById('h1');
+    this.gamePadMessage = document.getElementById('user-message');
     this.commandEl = document.getElementById('command-handler');
     this.robotUrl = 'http://192.168.4.1/?serialprint=';
 
@@ -18,12 +19,16 @@ class JoyPad {
   stateCheck() {
     window.requestAnimationFrame(() => {
       this.gamepads = navigator.getGamepads();
-      window.gamepad = this.gamepad;
       this.gamepad = this.gamepads[0];
-      window.gamepad = this.gamepad;
-      this.padStatus();
-      this.stateCheck();
-      this.highlightBlob(this.blobs, this.pressed);
+      if (this.gamepad){
+        this.gamePadMessage.innerHTML = 'Gampad connected';
+        this.padStatus();
+        this.stateCheck();
+        this.highlightBlob(this.blobs, this.pressed);
+      } else {
+        this.gamePadMessage.innerHTML = 'Connect your gampad and press the start button.';
+      }
+
     });
   }
 
